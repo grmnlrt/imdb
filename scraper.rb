@@ -19,8 +19,8 @@ def scrape_movie(url)
   title = m[:title]
   year = m[:year].to_i
   storyline = doc.search(".summary_text").text.strip
-  director = doc.search("[itemprop='director']").text.strip
-  cast = doc.search("[itemprop='actor']").take(3).map do |element|
+  director = doc.search("h4:contains('Director:') + a").text
+  cast = doc.search(".primary_photo + td a").take(3).map do |element|
     element.text.strip
   end
 
